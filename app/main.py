@@ -28,9 +28,18 @@ st.markdown(contact_form, unsafe_allow_html=True)
 
 # Define function to load CSS file
 def load_css(file_name):
-    with open(file_name) as f:
+    with open(file_name, "r") as f:
         css = f.read()
         st.markdown(f'<style>{css}</style>', unsafe_allow_html=True)
 
 # Call the function to apply the CSS
 load_css("styles.css")
+
+
+
+# #potential fix?
+# def load_css(file_name):
+#     full_path = os.path.join("static", file_name) #Add this line
+#     with open(full_path) as f: #change this line
+#         css = f.read()
+#         st.markdown(f'<style>{css}</style>', unsafe_allow_html=True)
