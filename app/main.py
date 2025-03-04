@@ -1,3 +1,4 @@
+import os
 import streamlit as st
 
 st.title("AI Agent Survey")
@@ -22,24 +23,24 @@ contact_form = """
 st.markdown(contact_form, unsafe_allow_html=True)
 
 
-##############################
-# Use Local CSS File
-###############################
+############################################
+# LOAD CSS FILE USING ABSOLUTE PATH
+############################################ 
 
-# Define function to load CSS file
+# Define function to load CSS file using absolute path
 def load_css(file_name):
-    with open(file_name, "r") as f:
+    # Get the directory where the current script is located
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    # Create an absolute path to the CSS file
+    css_path = os.path.join(script_dir, file_name)
+    
+    with open(css_path, "r") as f:
         css = f.read()
         st.markdown(f'<style>{css}</style>', unsafe_allow_html=True)
 
 # Call the function to apply the CSS
-load_css("styles.css")
-
-
-
-# #potential fix?
-# def load_css(file_name):
-#     full_path = os.path.join("static", file_name) #Add this line
-#     with open(full_path) as f: #change this line
-#         css = f.read()
-#         st.markdown(f'<style>{css}</style>', unsafe_allow_html=True)
+try:
+    load_css("styles.css")
+except FileNotFoundError as e:
+    st.error(f"Could not load CSS: {e}")
+    # You can add a fallback here if needed
