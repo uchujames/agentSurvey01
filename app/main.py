@@ -1,6 +1,4 @@
 import streamlit as st
-import emoji
-
 
 st.title("AI Agent Survey")
 st.header(":mailbox: Get in touch with me!")
